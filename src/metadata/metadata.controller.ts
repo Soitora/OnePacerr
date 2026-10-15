@@ -434,7 +434,7 @@ export class MetadataController {
 				season.originaltitle = `Manga Chapters ${arc.mangaChapters}`
 			}
 			if (arc.animeEpisodes) {
-				season.originaltitle = `${season.originaltitle}, AnimeEpisodes ${arc.animeEpisodes}`
+				season.originaltitle = `${season.originaltitle}, Anime Episodes ${arc.animeEpisodes}`
 			}
 
 			let NFO = `<?xml version='1.0' encoding='utf-8'?>\n${js2xml(
