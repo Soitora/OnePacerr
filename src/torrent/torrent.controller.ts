@@ -1,5 +1,5 @@
 import { Logger } from 'ez-ts-logger'
-import { existsSync, mkdirSync, readdirSync, unlinkSync } from 'node:fs'
+import { existsSync, mkdirSync, readdirSync, statSync, unlinkSync } from 'node:fs'
 import path from 'node:path'
 import environment from '../environment.js'
 import { TargetLibraryFile } from '../library/library.model.js'
@@ -26,6 +26,30 @@ import {
 	TorrentClient,
 	TorrentConnectionError,
 } from './torrent.model.js'
+
+/**
+ * Reports whether the source file is already present in the library.
+ *
+ * Importing is not idempotent: a re-run would delete and recreate the library
+ * file, touching it and making the media server rescan and regenerate
+ * trickplay/chapter images on every pass. When the destination is already the
+ * same hardlink, or an identical-size copy if hardlinks are disabled, the file
+ * can be treated as imported and left untouched.
+ */
+function isAlreadyImported(source: string, destination: string): boolean {
+	try {
+		const sourceStat = statSync(source)
+		const destinationStat = statSync(destination)
+		if (environment.LIBRARY_USE_HARDLINKS)
+			return (
+				sourceStat.ino === destinationStat.ino &&
+				sourceStat.dev === destinationStat.dev
+			)
+		return sourceStat.size === destinationStat.size
+	} catch {
+		return false
+	}
+}
 
 export class TorrentController {
 	private client: ITorrentController
@@ -354,6 +378,15 @@ export class TorrentController {
 			Logger.debug(
 				`File for S${String(episode.arc).padStart(2, '0')}-${String(episode.episode).padStart(2, '0')} detected`,
 			)
+
+			if (isAlreadyImported(source, destination)) {
+				Logger.debug(
+					`File for S${String(episode.arc).padStart(2, '0')}-${String(episode.episode).padStart(2, '0')} already imported, skipping re-import`,
+				)
+				processed = true
+				continue
+			}
+
 			if (!environment.PIPELINE_SKIP_DOWNLOADS_IMPORTS) {
 				if (previousLibraryFileName) {
 					const toDelete = path.resolve(
