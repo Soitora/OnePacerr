@@ -235,7 +235,7 @@ services:
       - TORRENT_PASSWORD=<your-password-here>
       - TORRENT_CLIENT=qbittorrent
       #- TORRENT_CLIENT_TIMEOUT=10
-      #- TORRENT_CATEGORY_FORCE=false
+      #- TORRENT_CATEGORY_FORCE=true
       #- TORRENT_CATEGORY=onepacerr
       #- TORRENT_CATEGORY_ONCE_COMPLETED=completed
       #- TORRENT_CHECK_INTERVAL=60
@@ -457,7 +457,7 @@ If you set `PLEX_SKIP_METADATA_FILES=false`, you can instead generate those file
 | ⭐ `TORRENT_USER` | _None_ | Your torrent API username. |
 | ⭐ `TORRENT_PASSWORD` | _None_ | Your torrent API password. |
 | `TORRENT_CLIENT_TIMEOUT` | 10 | Seconds to wait for torrent client to respond to requests, increase if you have a LOT of torrents. |
-| `TORRENT_CATEGORY_FORCE` | `false` | If `true`, when trying to add a torrent also forces a category update if torrent already exists with a different category. |
+| `TORRENT_CATEGORY_FORCE` | `true` | If `true`, when trying to add a torrent also forces a category update if torrent already exists with a different category. |
 | `TORRENT_CATEGORY` | `onepacerr` | Creates downloads with this category, also filters completed torrents using this. |
 | `TORRENT_CATEGORY_ONCE_COMPLETED` | `completed` | After processing completed downloads, changes the torrent category to this one. |
 | `TORRENT_CHECK_INTERVAL` | 60 | Seconds between checking for completed downloads. |

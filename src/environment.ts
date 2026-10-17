@@ -153,7 +153,7 @@ export default {
 		Number.parseInt(process.env.TORRENT_CLIENT_TIMEOUT || '10') * 1000,
 
 	TORRENT_CATEGORY_FORCE: /true/i.test(
-		process.env.TORRENT_CATEGORY_FORCE || 'false',
+		process.env.TORRENT_CATEGORY_FORCE || 'true',
 	),
 	TORRENT_CATEGORY: process.env.TORRENT_CATEGORY || `onepacerr`,
 	TORRENT_CATEGORY_ONCE_COMPLETED:
