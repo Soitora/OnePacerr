@@ -48,6 +48,9 @@ export default {
 	PIPELINE_FORCE_REDOWNLOAD: /true/i.test(
 		process.env.PIPELINE_FORCE_REDOWNLOAD || 'false',
 	),
+	PIPELINE_FORCE_REIMPORT_EXISTING: /true/i.test(
+		process.env.PIPELINE_FORCE_REIMPORT_EXISTING || 'false',
+	),
 	PIPELINE_SKIP_POSTERS: /true/i.test(
 		process.env.PIPELINE_SKIP_POSTERS || process.env.SKIP_POSTERS || 'false',
 	),
