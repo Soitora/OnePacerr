@@ -189,6 +189,7 @@ services:
       #- PIPELINE_SKIP_DOWNLOADS=false
       #- PIPELINE_SKIP_DOWNLOADS_IMPORTS=false
       #- PIPELINE_FORCE_REDOWNLOAD=false
+      #- PIPELINE_FORCE_REIMPORT_EXISTING=false
       #- PIPELINE_SKIP_POSTERS=false
 
       #- PIPELINE_INCLUDE_SPECIALS=false
@@ -328,6 +329,7 @@ Here is a breakdown of key optional variables you can adjust in your
 | 🍏 `PIPELINE_SKIP_DOWNLOADS` | `false` | If `true`, skips download. Use if you only want to organize your current files. |
 | 🍏 `PIPELINE_SKIP_DOWNLOADS_IMPORTS` | `false` | If `true`, skips updating posters when updating metadata. |
 | `PIPELINE_FORCE_REDOWNLOAD` | `false` | If `true`, downloads and imports files even if already present. |
+| `PIPELINE_FORCE_REIMPORT_EXISTING` | `false` | If `true`, when an episode that already exists is downloaded again, it reimports it overwriting the file. |
 | `PIPELINE_SKIP_POSTERS` | `false` | If `true`, skips updating posters when updating metadata. |
 | --- | --- | --- |
 | `PIPELINE_INCLUDE_SPECIALS` | `false` | Set to `true` to also process specials. |

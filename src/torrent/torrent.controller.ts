@@ -1,5 +1,11 @@
 import { Logger } from 'ez-ts-logger'
-import { existsSync, mkdirSync, readdirSync, statSync, unlinkSync } from 'node:fs'
+import {
+	existsSync,
+	mkdirSync,
+	readdirSync,
+	statSync,
+	unlinkSync,
+} from 'node:fs'
 import path from 'node:path'
 import environment from '../environment.js'
 import { TargetLibraryFile } from '../library/library.model.js'
@@ -379,7 +385,10 @@ export class TorrentController {
 				`File for S${String(episode.arc).padStart(2, '0')}-${String(episode.episode).padStart(2, '0')} detected`,
 			)
 
-			if (isAlreadyImported(source, destination)) {
+			if (
+				!environment.PIPELINE_FORCE_REIMPORT_EXISTING &&
+				isAlreadyImported(source, destination)
+			) {
 				Logger.debug(
 					`File for S${String(episode.arc).padStart(2, '0')}-${String(episode.episode).padStart(2, '0')} already imported, skipping re-import`,
 				)
